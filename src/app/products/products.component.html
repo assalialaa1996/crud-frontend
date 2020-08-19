@@ -1,0 +1,121 @@
+<div id="left">
+    <h1 class="header__title" i18n="@@heroesList">Liste des produits</h1>
+    <div>
+      <mat-list id="loading-list" *ngIf="!products">
+        <mat-list-item *ngFor="let i of [1,2,3,4,5,6,7,8]">
+          <img alt="default hero avatar" mat-list-avatar src="/assets/images/default-hero.png">
+          <h3 mat-line>
+            <app-loading-placeholder [width]="'150px'" [height]="'0.9rem'"></app-loading-placeholder>
+          </h3>
+          <p mat-line>
+            <app-loading-placeholder [width]="'100px'" [height]="'0.9rem'"></app-loading-placeholder>
+          </p>
+          <div class="hero-actions">
+            <app-loading-placeholder [width]="'30px'" [height]="'0.9rem'"></app-loading-placeholder>
+  
+            <mat-icon class="icon__like--grey">favorite</mat-icon>
+          </div>
+        </mat-list-item>
+      </mat-list>
+     
+   <table id="customers">
+    <tr>
+      <th></th>
+      <th>Nom de produit</th>
+      <th>Prix de produit</th>
+      <th>Quantité de produit</th>
+      <th>  </th>
+    </tr>
+     <tr *ngFor="let prod of products.products">
+       <td>  <input type="radio" name="list" value={{prod}}  (click)="show(prod)"></td>
+       <td>
+          {{prod.nom}}
+       </td>
+       <td>
+{{prod.prix}} €
+       </td>
+       <td>
+{{prod.qte}}
+       </td>
+       <td>
+         <button class="button button3" (click)="deleteProd(prod._id)">Supprimer</button>
+       </td>
+     </tr>
+   </table>
+  
+<br><br>
+  <div class="center">
+    <div class="pagination">
+    <a (click)="previous()" href="#">&laquo;</a>
+    <a  (click)="show_list(page+1)" *ngFor="let a of fakeArray; let page = index;" >{{page+1}}</a>
+   
+    <a (click)="next()" href="#">&raquo;</a>
+    </div>
+  </div>
+      
+    </div>
+    <div id="heroes-json">
+      <h1 class="header__title">Modifier produit selectionné</h1>
+    
+     
+          <form *ngIf="selected._id">
+            <mat-form-field class="input-container" >
+              <label>Nom: </label> <br><br>
+              <input matInput [(ngModel)]="selected.nom" name="name1">
+            </mat-form-field>
+            <mat-form-field class="input-container">
+             <label>prix: </label> <br><br> <input matInput  [(ngModel)]="selected.prix" name="prix1">
+            </mat-form-field>
+            <mat-form-field class="input-container">
+              <label>Quantité:</label> <br><br>
+              <input matInput  [(ngModel)]="selected.qte" name="qte1">
+            </mat-form-field>
+            <br>
+            <button  style="background-color:green"class="button" (click)="UpdateProd(selected._id,selected)">Modifier</button>
+          </form> 
+       
+      
+     
+      
+
+    </div>
+  </div>
+  <div id="right">
+    
+    <h1 class="header__title" i18n="@@createHero">Créer un nouveau produit</h1>
+    <div id="form-loading" *ngIf="!products">
+      <form>
+        <div class="input-container">
+          <app-loading-placeholder [height]="'2rem'"></app-loading-placeholder>
+        </div>
+        <div class="input-container">
+          <app-loading-placeholder [height]="'2rem'"></app-loading-placeholder>
+        </div>
+  
+        <button aria-label="create button" mat-raised-button [disabled]="true" i18n="@@create">Create</button>
+      </form>
+    </div>
+    <div *ngIf="products">
+      <form>
+        <mat-form-field class="input-container" >
+          <label>Nom: </label> <br><br>
+          <input matInput [(ngModel)]="name" name="name">
+        </mat-form-field>
+        <mat-form-field class="input-container">
+         <label>prix: </label> <br> <br><input matInput [(ngModel)]="prix" name="prix">
+        </mat-form-field>
+        <mat-form-field class="input-container">
+          <label>Quantité:</label> <br><br>
+          <input matInput [(ngModel)]="qte" name="qte">
+        </mat-form-field>
+        <br>
+        <button class="button" style="background-color: #423fee;" (click)="addProduct()">Ajouter</button>
+      </form> 
+        
+     
+    </div>
+  
+    
+  </div>
+  <div class="clear"></div>
+  
